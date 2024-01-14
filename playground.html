@@ -6,5 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playground — Complete Intro to Vue 3</title>
   </head>
-  <body></body>
+
+  <body>
+    <div id="app">
+
+      <div>
+        <h2>counter - {{count}}</h2>
+        <button v-on:click="increCount">ince count</button>
+
+        <div>
+          <label for="increAmount">incre by:</label>
+          <input type="number" 
+   
+          v-model="increAmount">
+        </div>
+        <h1>{{increAmount}}</h1>
+    
+      </div>
+      <hr />
+      <div v-if="characterList.length === 0" >
+        <h2 > no characterList</h2>
+        <p>{{ message }}</p>
+      </div>
+      <div v-else="haracterList.length > 0">
+        <h2 >characterList</h2>
+        <ul >
+          <li v-for="char in characterList" >
+            {{ char.name }} {{ char.uuid }}
+          </li>
+        </ul>
+      
+
+      </div>
+     
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+      const { createApp } = Vue
+
+      
+      const app = createApp({
+        data() {
+          return {
+            message: 'Hello it works',
+            characterList: [
+             {
+               name: "test",
+               uuid: "be96a5d9-c03d-40b8-80e0-9d236b3575f5"
+             },
+             {
+              name: "test2",
+              uuid: "7f4894b7-ac52-4b78-b5e6-9b5b6edb4b37"
+             },
+            
+            ],
+            count: 0,
+            increAmount: 5
+          }
+        },
+        methods: {
+          increCount() {
+            this.count += this.increAmount
+          }
+        }
+
+      })
+      app.mount('#app')
+  </script>
 </html>
