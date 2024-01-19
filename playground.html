@@ -28,11 +28,29 @@
         <h2 > no characterList</h2>
         <p>{{ message }}</p>
       </div>
-      <div v-else="haracterList.length > 0">
+      <div v-else="characterList.length > 0">
         <h2 >characterList</h2>
         <ul >
           <li v-for="char in characterList" >
             {{ char.name }} {{ char.uuid }}
+            <button @click="addChar(char)">add char</button>
+          </li>
+        </ul>
+      
+
+      </div>
+
+      <hr />
+      <div v-if="favouriteCharacterList.length === 0" >
+        <h2 > no favouriteCharacterListt</h2>
+    
+      </div>
+      <div v-else="favouriteCharacterList.length > 0">
+        <h2 >favouriteCharacterListt</h2>
+        <ul >
+          <li v-for="favChar in favouriteCharacterList" >
+            {{ favChar.name }} {{favChar.uuid }}
+            <button @click="deleteChar(favChar.uuid )">delete char</button>
           </li>
         </ul>
       
@@ -62,12 +80,28 @@
             
             ],
             count: 0,
-            increAmount: 5
+            increAmount: 5,
+            favouriteCharacterList: []
           }
+     
         },
         methods: {
           increCount() {
             this.count += this.increAmount
+          },
+          addChar(char) {
+            console.log(char)
+            const boom = {
+              uuid: char. uuid,
+              name: char.name,
+            }
+            this.favouriteCharacterList.push(boom)
+          },
+
+          deleteChar(id) {
+            console.log(id)
+
+            this.favouriteCharacterList =  this.favouriteCharacterList.filter((item) => item.uuid !== id)
           }
         }
 
